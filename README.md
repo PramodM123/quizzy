@@ -2,13 +2,13 @@
 
 Quizzy is a web application being developed using Microservices architecture.
 
-## Services:
+# Services:
 
-# Question microservice: service to manage questions
+## Question microservice: service to manage questions
   - Swagger : https://localhost:44321/swagger/index.html
   - Sample POST : https://localhost:44321/api/Question
     {
-        "questionId": "<guid>",
+        "questionId": "b27c7e0c-4c13-4743-8925-f5c0e8d081c1",
         "description": "Sun rises in ",
         "options": [
             "North", "East", "West", "South"
@@ -17,4 +17,4 @@ Quizzy is a web application being developed using Microservices architecture.
         "tag": "General"
     }
 
-  - Sample GET: https://localhost:44321/api/Question/<guid>
+  - Sample GET: https://localhost:44321/api/Question/b27c7e0c-4c13-4743-8925-f5c0e8d081c1

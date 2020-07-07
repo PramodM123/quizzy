@@ -5,7 +5,7 @@ namespace QuestionService.Models
 {
     public class Question
     {
-        public static readonly string DocumentName = "QuestionBank";
+        public static readonly string DocumentName = "questionBank";
 
         public Guid QuestionId { get; set; }
         public string Description { get; set; }

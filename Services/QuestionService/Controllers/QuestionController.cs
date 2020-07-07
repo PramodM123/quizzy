@@ -11,12 +11,12 @@ namespace QuestionService.Controllers
     public class QuestionController : ControllerBase
     {
         private readonly ILogger<QuestionController> _logger;
-        private readonly IQuestionRepository _QuestionRepository;
+        private readonly IQuestionRepository _questionRepository;
 
         public QuestionController(ILogger<QuestionController> logger, IQuestionRepository repository)
         {
             _logger = logger;
-            _QuestionRepository = repository;
+            _questionRepository = repository;
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace QuestionService.Controllers
         [HttpGet("{id}")]
         public ActionResult<Question> Get(Guid id)
         {
-            var QuestionQuestion = _QuestionRepository.GetQuestionQuestion(id);
-            return Ok(QuestionQuestion);
+            var question = _questionRepository.GetQuestionQuestion(id);
+            return Ok(question);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace QuestionService.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Question question)
         {
-            _QuestionRepository.InsertQuestionQuestion(question);
+            _questionRepository.InsertQuestionQuestion(question);
             return CreatedAtAction(nameof(Get), new { id = question.QuestionId }, question);
         }
     }

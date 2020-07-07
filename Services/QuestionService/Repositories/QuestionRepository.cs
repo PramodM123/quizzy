@@ -21,7 +21,7 @@ namespace QuestionService.Repositories
 
         public Question GetQuestionQuestion(Guid questionId)
         {
-            return _repository.Find(x => x.QuestionId == questionId).FirstOrDefault();
+            return _repository.Find(x => x.Id == questionId).FirstOrDefault();
         }
 
         public List<Question> GetQuestionQuestions()

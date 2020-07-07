@@ -40,7 +40,7 @@ namespace QuestionService.Controllers
         public ActionResult Post([FromBody] Question question)
         {
             _questionRepository.InsertQuestionQuestion(question);
-            return CreatedAtAction(nameof(Get), new { id = question.QuestionId }, question);
+            return CreatedAtAction(nameof(Get), new { id = question.Id }, question);
         }
     }
 }

@@ -1,0 +1,10 @@
+# quizzy
+
+# Visual studio
+.vs/
+
+# Build
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/

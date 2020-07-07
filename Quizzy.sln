@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionService", "QuestionService\QuestionService.csproj", "{E4983808-3462-413D-9458-A7F830781CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionService", "Services\QuestionService\QuestionService.csproj", "{E4983808-3462-413D-9458-A7F830781CF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EB09E6E4-9462-4E3C-8336-E9E5EDD549E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4983808-3462-413D-9458-A7F830781CF7} = {EB09E6E4-9462-4E3C-8336-E9E5EDD549E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6B6DAEA-15CC-4810-8B57-9D9D93E7E08C}

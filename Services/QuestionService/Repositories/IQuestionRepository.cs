@@ -6,10 +6,10 @@ namespace QuestionService.Repositories
 {
     public interface IQuestionRepository
     {
-        List<Question> GetQuestionQuestions();
-        Question GetQuestionQuestion(Guid questionId);
-        void InsertQuestionQuestion(Question question);
-        void UpdateQuestionQuestion(Question question);
-        void DeleteQuestionQuestion(Guid questionId);
+        List<Question> GetQuestions();
+        Question GetQuestion(Guid questionId);
+        void InsertQuestion(Question question);
+        void UpdateQuestion(Question question);
+        void DeleteQuestion(Guid questionId);
     }
 }

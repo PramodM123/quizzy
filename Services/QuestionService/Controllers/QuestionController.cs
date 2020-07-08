@@ -27,7 +27,7 @@ namespace QuestionService.Controllers
         [HttpGet("{id}")]
         public ActionResult<Question> Get(Guid id)
         {
-            var question = _questionRepository.GetQuestionQuestion(id);
+            var question = _questionRepository.GetQuestion(id);
             return Ok(question);
         }
 
@@ -39,7 +39,7 @@ namespace QuestionService.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Question question)
         {
-            _questionRepository.InsertQuestionQuestion(question);
+            _questionRepository.InsertQuestion(question);
             return CreatedAtAction(nameof(Get), new { id = question.Id }, question);
         }
     }

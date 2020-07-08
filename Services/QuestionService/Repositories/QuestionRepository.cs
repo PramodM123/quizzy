@@ -14,29 +14,33 @@ namespace QuestionService.Repositories
             _repository = db.GetCollection<Question>(Question.DocumentName);
         }
 
-        public void DeleteQuestionQuestion(Guid questionId)
+        public void DeleteQuestion(Guid questionId)
         {
-            throw new NotImplementedException();
+            _repository.DeleteOne(q => q.Id == questionId);
         }
 
-        public Question GetQuestionQuestion(Guid questionId)
+        public Question GetQuestion(Guid questionId)
         {
-            return _repository.Find(x => x.Id == questionId).FirstOrDefault();
+            return _repository.Find(q => q.Id == questionId).FirstOrDefault();
         }
 
-        public List<Question> GetQuestionQuestions()
+        public List<Question> GetQuestions()
         {
-            throw new NotImplementedException();
+            return _repository.Find(FilterDefinition<Question>.Empty).ToList();
         }
 
-        public void InsertQuestionQuestion(Question question)
+        public void InsertQuestion(Question question)
         {
             _repository.InsertOne(question);
         }
 
-        public void UpdateQuestionQuestion(Question question)
+        public void UpdateQuestion(Question question)
         {
-            throw new NotImplementedException();
+            _repository.UpdateOne(q => q.Id == question.Id, Builders<Question>.Update
+                .Set(q => q.Answer, question.Answer)
+                .Set(q => q.Description, question.Description)
+                .Set(q => q.Options, question.Options)
+                .Set(q => q.Tag, question.Tag));
         }
     }
 }

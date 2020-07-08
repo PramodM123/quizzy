@@ -31,6 +31,7 @@ namespace QuestionService.Repositories
 
         public void InsertQuestion(Question question)
         {
+            question.Id = Guid.NewGuid(); //auto-generating id to avoid conflicts
             _repository.InsertOne(question);
         }
 

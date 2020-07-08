@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestionService.Models;
@@ -41,6 +42,45 @@ namespace QuestionService.Controllers
         {
             _questionRepository.InsertQuestion(question);
             return CreatedAtAction(nameof(Get), new { id = question.Id }, question);
+        }
+
+        /// <summary>
+        /// GET api/Question/
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<IEnumerable<Question>> GetQuestions()
+        {
+            var questions = _questionRepository.GetQuestions();
+            return Ok(questions);
+        }
+
+        /// <summary>
+        /// PUT api/Question
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public ActionResult Put([FromBody] Question question)
+        {
+            if (question == null)
+            {
+                return new BadRequestResult();
+            }
+            _questionRepository.UpdateQuestion(question);
+            return CreatedAtAction(nameof(Get), new { id = question.Id }, question);
+        }
+
+        /// <summary>
+        /// DELETE api/Question
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public ActionResult Delete(Guid id)
+        {
+            _questionRepository.DeleteQuestion(id);
+            return new OkResult();
         }
     }
 }

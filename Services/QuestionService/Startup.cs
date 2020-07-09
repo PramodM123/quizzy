@@ -32,6 +32,7 @@ namespace QuestionService
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Question", Version = "v1"}); });
 
             services.AddHealthChecks()
+                .AddCheck("self", () => HealthCheckResult.Healthy())
                 .AddMongoDb(
                     mongodbConnectionString: Configuration.GetSection("mongo").GetSection("ConnectionString").Value,
                     name: "mongodb",
@@ -65,6 +66,11 @@ namespace QuestionService
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
+                {
+                    Predicate = r => r.Name.Contains("self")
                 });
             });
         }

@@ -1,7 +1,10 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
@@ -24,11 +27,16 @@ namespace QuestionService
         {
             services.AddControllers();
             services.AddMongoConnection(Configuration);
-            services.AddSingleton<IQuestionRepository>(service => new QuestionRepository(service.GetService<IMongoDatabase>()));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Question", Version = "v1" });
-            });
+            services.AddSingleton<IQuestionRepository>(service =>
+                new QuestionRepository(service.GetService<IMongoDatabase>()));
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Question", Version = "v1"}); });
+
+            services.AddHealthChecks()
+                .AddMongoDb(
+                    mongodbConnectionString: Configuration.GetSection("mongo").GetSection("ConnectionString").Value,
+                    name: "mongodb",
+                    failureStatus: HealthStatus.Unhealthy
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,10 +49,7 @@ namespace QuestionService
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Question V1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Question V1"); });
 
             app.UseHttpsRedirection();
 
@@ -55,7 +60,14 @@ namespace QuestionService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }
 }
+    

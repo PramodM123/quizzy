@@ -5,6 +5,10 @@ Quizzy is a web application being developed using Microservices architecture.
 # Services:
 
 ## Question microservice: service to manage questions
+  - Healthchecks
+  - - https://localhost:44321/hc (provides mongodb health status)
+  - - https://localhost:44321/liveness (for kubernetes purpose)
+  
   - Swagger : https://localhost:44321/swagger/index.html
   - Sample POST : https://localhost:44321/api/Question
     {

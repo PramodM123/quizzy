@@ -38,6 +38,13 @@ namespace QuestionService
                     name: "mongodb",
                     failureStatus: HealthStatus.Unhealthy
                 );
+
+            services
+                .AddHealthChecksUI(setupSettings: setup =>
+                {
+                    setup.AddHealthCheckEndpoint("Question-API", "/hc");
+                })
+                .AddInMemoryStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +71,7 @@ namespace QuestionService
 
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
-                    Predicate = _ => true,
+                    Predicate = r =>r.Name != "self",
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
 
@@ -72,6 +79,8 @@ namespace QuestionService
                 {
                     Predicate = r => r.Name.Contains("self")
                 });
+
+                endpoints.MapHealthChecksUI();
             });
         }
     }

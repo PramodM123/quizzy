@@ -80,7 +80,7 @@ namespace QuestionService.Controllers
         public ActionResult Delete(Guid id)
         {
             _questionRepository.DeleteQuestion(id);
-            return new OkResult();
+            return Ok();
         }
     }
 }

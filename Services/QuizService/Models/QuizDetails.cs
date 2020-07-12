@@ -9,7 +9,7 @@ namespace QuizService.Models
 
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public int Score { get; set; }
-        public List<Attempt> Attempts { get; set; }
+        public int TotalScore { get; set; }
+        public List<Attempt> Attempts { get; set; } = new List<Attempt>();
     }
 }
